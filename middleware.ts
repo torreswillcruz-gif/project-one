@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  if (!request.cookies.has('will_session')) {
+  const sessionCookie = request.cookies.get('will_session');
+
+  if (!sessionCookie) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
+
   return NextResponse.next();
 }
 
-export const config = { matcher: ['/dashboard/:path*'] };
+export const config = {
+  matcher: ['/dashboard/:path*'],
+};
