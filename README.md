@@ -22,11 +22,3 @@ Create a local `.env.local` file or configure the variable in Vercel:
 
 ```env
 MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrites=true&w=majority
-```
-
-Never commit the real MongoDB connection string. Install dependencies and run:
-
-```bash
-npm install
-npm run dev
-```
