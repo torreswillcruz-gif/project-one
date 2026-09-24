@@ -1,0 +1,14 @@
+:global {
+  .dashboard-shell { display: flex; min-height: 100vh; background: var(--cream); }
+  .sidebar { display: flex; width: 250px; flex-direction: column; background: var(--ink); color: #fff; }
+  .dashboard-main { flex: 1; }
+  .dashboard-header { display: flex; justify-content: space-between; align-items: center; padding: 38px 5%; border-bottom: 1px solid var(--line); background: #fff; }
+  .dashboard-content { padding: 5%; }
+  .panel { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .progress-bar { height: 6px; margin-top: 12px; border-radius: 10px; background: var(--line); overflow: hidden; }
+  .progress-bar span { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+}
+@media (max-width: 800px) { :global(.stats-grid), :global(.two-column) { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { :global(.dashboard-shell) { display: block; } :global(.sidebar) { width: 100%; min-height: auto; } }

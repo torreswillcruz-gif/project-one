@@ -1,0 +1,10 @@
+:global {
+  .site-header { border-bottom: 1px solid var(--line); background: rgba(246,247,245,.92); }
+  .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 60px; align-items: center; padding: 120px 0 110px; }
+  .hero h1 { max-width: 760px; margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: clamp(56px, 8vw, 104px); line-height: .96; letter-spacing: -.07em; }
+  .logo-strip { border-block: 1px solid var(--line); background: #fff; }
+  .section { padding: 110px 0; }
+  .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .section-muted { background: var(--lime); }
+  .site-footer { margin-top: 100px; padding: 28px 0; background: var(--ink); color: #fff; }
+}

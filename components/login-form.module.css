@@ -1,0 +1,10 @@
+:global {
+  .auth-shell { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+  .auth-visual { display: flex; align-items: flex-end; padding: 48px; background: var(--ink); color: #fff; }
+  .auth-panel { display: flex; align-items: center; justify-content: center; padding: 48px; background: #fff; }
+  .auth-card { width: min(100%, 420px); }
+  .auth-form { display: grid; gap: 12px; }
+  .auth-form input { min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+  .auth-error { color: #a23832; }
+}
+@media (max-width: 800px) { :global(.auth-shell) { grid-template-columns: 1fr; } }
