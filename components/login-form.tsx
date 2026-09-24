@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { COMPANY_EMAIL, COMPANY_INITIAL, COMPANY_NAME } from '@/lib/brand';
+import styles from './login-form.module.css';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,9 +35,50 @@ export default function LoginForm() {
   }
 
   return (
-    <main className="auth-shell">
-      <section className="auth-visual"><div className="auth-overlay"><Link href="/" className="brand brand-light"><span className="brand-mark">{COMPANY_INITIAL}</span>{COMPANY_NAME}<span className="brand-dot">.</span></Link><div className="auth-copy"><p className="eyebrow eyebrow-light">Welcome back</p><h1>Good work starts with a clear <span>direction.</span></h1></div></div></section>
-      <section className="auth-panel"><div className="auth-card"><Link href="/" className="brand"><span className="brand-mark">{COMPANY_INITIAL}</span>{COMPANY_NAME}<span className="brand-dot">.</span></Link><div className="auth-header"><p className="eyebrow">Account access</p><h2>Sign in</h2></div><p className="auth-subtitle">Welcome back. Enter your details to continue.</p><form className="login-form" onSubmit={handleSubmit}><label htmlFor="email">Email address</label><input id="email" name="email" type="email" placeholder="you@company.com" autoComplete="email" required /><label htmlFor="password">Password</label><div className="password-wrap"><input id="password" name="password" type={showPassword ? 'text' : 'password'} placeholder="Enter your password" autoComplete="current-password" required /><button type="button" className="password-toggle" onClick={() => setShowPassword((value) => !value)}>{showPassword ? 'Hide' : 'Show'}</button></div><div className="form-row"><label className="checkbox-row"><input type="checkbox" name="remember" /><span>Remember me</span></label><a href={`mailto:${COMPANY_EMAIL}?subject=Reset%20password`}>Forgot password?</a></div><button type="submit" className="button primary-btn" disabled={loading}>{loading ? 'Signing in...' : 'Sign in ↗'}</button>{error && <p className="error-message" role="alert">{error}</p>}</form><p className="signup-copy">New to {COMPANY_NAME}? <Link href="/users">Request an account</Link></p></div></section>
+    <main className={styles.authShell}>
+      <section className={styles.authVisual}>
+        <div className={styles.authOverlay}>
+          <Link href="/" className={`${styles.brand} ${styles.brandLight}`}>
+            <span className={styles.brandMark}>{COMPANY_INITIAL}</span>
+            {COMPANY_NAME}<span className={styles.brandDot}>.</span>
+          </Link>
+          <h1>Welcome back</h1>
+          <p>We build thoughtful systems that help teams move with clarity.</p>
+        </div>
+      </section>
+
+      <section className={styles.authPanel}>
+        <div className={styles.authCard}>
+          <Link href="/" className={styles.brand}>
+            <span className={styles.brandMark}>{COMPANY_INITIAL}</span>
+            {COMPANY_NAME}<span className={styles.brandDot}>.</span>
+          </Link>
+
+          <h2>Entrar</h2>
+
+          <form className={styles.authForm} onSubmit={handleSubmit}>
+            <label htmlFor="email">E-mail</label>
+            <input id="email" name="email" type="email" autoComplete="email" placeholder="usuario@empresa.com" required />
+
+            <label htmlFor="password">Senha</label>
+            <div className={styles.passwordWrap}>
+              <input id="password" name="password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" minLength={8} placeholder="Digite sua senha" required />
+              <button type="button" className={styles.togglePassword} onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}>
+                {showPassword ? 'Ocultar' : 'Mostrar'}
+              </button>
+            </div>
+
+            <button type="submit" className={`${styles.button} ${styles.buttonDark}`} disabled={loading}>
+              {loading ? 'Entrando...' : 'Entrar'}
+            </button>
+
+            {error && <p className={styles.authError} role="alert">{error}</p>}
+          </form>
+
+          <p className={styles.metaLink}>Ainda não tem conta? <Link href="/users">Criar cadastro</Link></p>
+          <p className={styles.metaLink}>Contato: <a href={`mailto:${COMPANY_EMAIL}`}>{COMPANY_EMAIL}</a></p>
+        </div>
+      </section>
     </main>
   );
 }
