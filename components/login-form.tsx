@@ -1,35 +1,58 @@
 'use client';
 
+// Importa o hook usado para controlar os estados interativos do formulário.
 import { useState } from 'react';
 import Link from 'next/link';
 import { COMPANY_EMAIL, COMPANY_INITIAL, COMPANY_NAME } from '@/lib/brand';
 import styles from './login-form.module.css';
 
+// Componente responsável por renderizar o formulário de login.
 export default function LoginForm() {
+  // Controla se a senha está visível ou ocultada.
   const [showPassword, setShowPassword] = useState(false);
+
+  // Indica se a requisição de login está sendo processada.
   const [loading, setLoading] = useState(false);
+
+  // Armazena a mensagem de erro exibida ao usuário.
   const [error, setError] = useState('');
 
+  // Envia os dados do formulário para a rota de autenticação.
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    // Impede o recarregamento padrão da página ao enviar o formulário.
     event.preventDefault();
+
+    // Ativa o estado de carregamento e limpa erros anteriores.
     setLoading(true);
     setError('');
 
+    // Obtém o formulário enviado e transforma seus campos em um objeto.
     const form = event.currentTarget;
     const values = Object.fromEntries(new FormData(form).entries());
 
     try {
+      // Faz uma requisição POST para a API de login do próprio Next.js.
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
+
+      // Converte a resposta da API para JSON.
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.error ?? 'Não foi possível realizar o login.');
+      // Interrompe o fluxo quando a API retorna erro.
+      if (!response.ok) {
+        throw new Error(data.error ?? 'Não foi possível realizar o login.');
+      }
+
+      // Após o login, redireciona o usuário para o dashboard.
       window.location.assign('/dashboard');
     } catch (requestError) {
+      // Exibe uma mensagem amigável quando a autenticação falha.
       setError(requestError instanceof Error ? requestError.message : 'Não foi possível realizar o login.');
+
+      // Libera o botão para permitir uma nova tentativa.
       setLoading(false);
     }
   }
