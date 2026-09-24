@@ -1,5 +1,5 @@
-import DashboardShell from '@/components/dashboard-shell';
+import CompanyHome from '@/components/company-home';
 
-export default function DashboardPage() {
-  return <DashboardShell />;
+export default function HomePage() {
+  return <CompanyHome />;
 }
