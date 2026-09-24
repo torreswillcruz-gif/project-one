@@ -1,54 +1,32 @@
-# Frontend + Backend
+# Will Solutions
 
-Este repositório contém a aplicação Next.js e uma API Node.js independente.
+Clean company website and dashboard built with Next.js App Router.
 
-## Estrutura
+## Routes
 
-- A aplicação Next.js na raiz é o frontend (`app/`, `components/` e `lib/brand.ts`).
-- A API Node.js fica em `backend/`.
-- As rotas da API são:
-  - `POST /api/auth/login`
-  - `POST /api/auth/logout`
-  - `GET /api/auth/me`
-  - `POST /api/users`
-  - `GET /health`
+- `/` — Will Solutions public home page
+- `/login` — sign-in page
+- `/dashboard` — internal workspace dashboard
+- `/users` — user registration page
+- `/api/users` — user registration API
 
-> As rotas `app/api/*` existentes foram mantidas temporariamente para compatibilidade com o deploy atual. O frontend novo deve usar `NEXT_PUBLIC_API_URL` e a API em `backend/`. Elas podem ser removidas depois que o deploy estiver apontando para o backend.
+## Shared branding
 
-## Desenvolvimento
+The company name and contact details are centralized in `lib/brand.ts`. Update that file to change the brand throughout the Next.js components.
 
-### Frontend
+The legacy static `index.html` is kept for compatibility and uses the same Will Solutions text, but it cannot import TypeScript constants directly.
 
-```bash
-npm install
-npm run dev
-```
+## Environment
 
-O frontend roda em `http://localhost:3000`.
-
-Configure no `.env.local`:
+Create a local `.env.local` file or configure the variable in Vercel:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:4000
-```
-
-### Backend
-
-```bash
-cd backend
-npm install
-cp .env.example .env
-npm run dev
-```
-
-A API roda em `http://localhost:4000`.
-
-Variáveis do backend:
-
-```env
-PORT=4000
-FRONTEND_URL=http://localhost:3000
 MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrites=true&w=majority
 ```
 
-Em produção, `FRONTEND_URL` deve ser a URL pública do Next.js. O backend usa cookies HTTP-only e CORS com credenciais para manter a sessão entre as duas aplicações.
+Never commit the real MongoDB connection string. Install dependencies and run:
+
+```bash
+npm install
+npm run dev
+```
