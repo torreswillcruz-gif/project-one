@@ -1,17 +1,23 @@
 # Project One
 
-A clean company website starter with a maintainable folder structure.
+A clean company website with a static marketing site and a Next.js dashboard.
 
-## Pages
+## Structure
 
-- `index.html` — public home page
-- `src/pages/login.html` — responsive login page
+- `index.html` — original public marketing home page
+- `src/pages/login.html` — original static login page
+- `app/` — Next.js App Router entry points and global styles
+- `components/dashboard-shell.tsx` — interactive dashboard UI
+- `src/css/` and `src/js/` — static site styles and behavior
+- `src/assets/` — images and icons
 
-## Folders
+## Run the Next.js dashboard
 
-- `src/css/` — global styles
-- `src/js/` — page behavior and form interactions
-- `src/pages/` — secondary pages
-- `src/assets/` — reserved for images, icons, and other static assets
+```bash
+npm install
+npm run dev
+```
 
-Open `index.html` directly in a browser or use any static web server. The login form is a front-end demo and should be connected to a real authentication API before production use.
+Open [http://localhost:3000](http://localhost:3000). The dashboard is available at the root route `/` when running Next.js.
+
+The dashboard currently uses sample data. Connect its project, activity, user, and authentication actions to your API or database before using it in production.
