@@ -1,7 +1,15 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-// A autenticação é feita pela API Node.js. O frontend não deve bloquear a rota
-// com cookies locais, pois o cookie HTTP-only pertence ao domínio da API.
-export function middleware() {
+export function middleware(request: NextRequest) {
+  const sessionCookie = request.cookies.get('will_session');
+
+  if (!sessionCookie) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: ['/dashboard/:path*'],
+};
